@@ -184,7 +184,7 @@ class XRegistryLocal(XRegistryBase):
         if "devicekey" in device:
             payload = encrypt(payload, device["devicekey"])
 
-        log = f"{device['deviceid']} => Local4 | {params}"
+        log = f"{device['deviceid']} => Local4 | {device['host']} | {params}"
 
         try:
             host = device["host"]
