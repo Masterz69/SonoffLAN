@@ -237,9 +237,11 @@ class XRegistry(XRegistryBase):
             device.pop("devicekey")
 
         tag = "Local3" if "host" in msg else "Local0"
-        msg["host"] = f"ewelink_{did}.local.:8081" if "host" not in msg
 
-        _LOGGER.debug(f"{did} <= {tag} | %s | {msg.get('seq', '')}", params)
+        _LOGGER.debug(f"{did} <= {tag} | {msg.get('host', '')} | %s | {msg.get('seq', '')}", params)
+
+        if "host" not in msg and "host" not in device:
+            msg["host"] = f"ewelink_{did}.local.:8081"
 
         # msg from zeroconf ServiceStateChange.Removed
         if params.get("online") is False:
